@@ -13,7 +13,7 @@ public class PersonDAO implements DataAccessObject<Person> {
     static PersonDAO instance;
     private List<Person> persons = new ArrayList<>();
 
-    static PersonDAO getPersonDAOInstance() {
+    public static PersonDAO getPersonDAOInstance() {
         if(instance == null)
             instance = new PersonDAO();
         return instance;
@@ -49,6 +49,18 @@ public class PersonDAO implements DataAccessObject<Person> {
     @Override
     public void delete(Person person) {
         persons.remove(person);
+
+    }
+
+    public void listPersonRecords(){
+
+        PersonDAO personDAO = PersonDAO.getPersonDAOInstance();
+        List<Person> personList = personDAO.getAll();
+
+        for ( int counter = 1; counter <= personList.size(); counter++){
+
+            System.out.println(""+counter+". "+personList.get(counter-1));
+        }
 
     }
 

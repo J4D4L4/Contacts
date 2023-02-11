@@ -1,4 +1,4 @@
-package contacts;
+package contacts.commands;
 
 import java.util.Scanner;
 
@@ -16,7 +16,7 @@ public abstract class Command {
         return scanner.nextLine();
     }
 
-    protected abstract void execute();
+    public abstract void execute();
 
 
 }

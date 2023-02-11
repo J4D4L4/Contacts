@@ -22,6 +22,10 @@ public class Person {
         this.number = number;
     }
 
+    public String toString(){
+        return name+" "+surname+", "+number;
+    }
+
 
     public void setName(String name) {
         this.name = name;
