@@ -1,16 +1,12 @@
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 import static org.junit.Assert.assertEquals;
 
 import contacts.Person;
-import contacts.PersonCreationCommand;
+import contacts.commands.PersonCreationCommand;
 import contacts.PersonDAO;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 
 public class PersonCreationCommandTest {
     private PersonCreationCommand personCreationCommand;

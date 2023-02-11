@@ -1,4 +1,4 @@
-package contacts;
+package contacts.commands;
 
 class ExitCommand extends Command{
 
@@ -12,7 +12,7 @@ class ExitCommand extends Command{
         }
 
     @Override
-    protected void execute() {
+    public void execute() {
         System.out.println("Bye!");
         System.exit(0);
     }

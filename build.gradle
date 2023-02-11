@@ -1,6 +1,7 @@
 buildscript {
     repositories {
         mavenCentral()
+
     }
 }
 
@@ -12,6 +13,7 @@ subprojects {
 
     repositories {
         mavenCentral()
+        jcenter()
 
         maven { url "https://jitpack.io" }
     }
@@ -19,7 +21,16 @@ subprojects {
     dependencies {
         testImplementation 'com.github.hyperskill:hs-test:release-SNAPSHOT'
         testImplementation "org.mockito:mockito-core:3.+"
+        testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+        testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+        testImplementation(
+                'org.junit.jupiter:junit-jupiter-params:5.8.2'
+        )
+
+
+
     }
+
 
     configurations.all {
         resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
@@ -31,7 +42,9 @@ subprojects {
     }
 
     test {
+
         systemProperty "file.encoding", "utf-8"
+        useJUnitPlatform()
     }
 
     compileJava.options.encoding = 'utf-8'

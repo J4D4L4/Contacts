@@ -1,4 +1,9 @@
-package contacts;
+package contacts.commands;
+
+import contacts.ContactBuilder;
+import contacts.InputValidator;
+import contacts.Person;
+import contacts.PersonDAO;
 
 public class PersonCreationCommand extends Command {
 
@@ -20,9 +25,12 @@ public class PersonCreationCommand extends Command {
     }
 
     public Person createPerson(String name, String surname, String number) {
-        Person person = new Person(name,surname,number);
+        ContactBuilder contactBuilder = new ContactBuilder();
+        contactBuilder.setName(name);
+        contactBuilder.setSurname(surname);
+        contactBuilder.setNumber(number);
         System.out.println("A record created!");
-        return person;
+        return contactBuilder.getResult();
 
     }
     public String createUserSurNameFromInput() {
@@ -37,7 +45,13 @@ public class PersonCreationCommand extends Command {
 
     public String createNumberFromInput() {
         System.out.println("Enter the number:");
-        return getUserInput();
+        String number = getUserInput();
+        if(InputValidator.validateNumber(number))
+            return number;
+        else {
+            System.out.println("Wrong number format!");
+            return "[no number]";
+        }
     }
 
 }
