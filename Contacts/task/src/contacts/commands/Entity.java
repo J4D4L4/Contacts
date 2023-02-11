@@ -1,8 +1,9 @@
 package contacts.commands;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class Entity {
+public class Entity implements Serializable {
 
     String name;
     String number;

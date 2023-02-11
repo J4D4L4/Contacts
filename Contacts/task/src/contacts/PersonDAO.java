@@ -3,6 +3,7 @@ package contacts;
 import contacts.DataAccessObject;
 import contacts.Person;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -35,6 +36,7 @@ public class PersonDAO implements DataAccessObject<Person> {
 
     @Override
     public void update(Person person, String[] params) {
+        person.setEdited(LocalDateTime.now());
         if(params[0] != "")
             person.setName(Objects.requireNonNull(
                     params[0], "Name cannot be null"));

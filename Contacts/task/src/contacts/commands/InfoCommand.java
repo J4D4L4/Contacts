@@ -5,6 +5,7 @@ import contacts.OrganisationDAO;
 import contacts.Person;
 import contacts.PersonDAO;
 
+import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.util.List;
 
@@ -13,7 +14,7 @@ public class InfoCommand extends Command{
     OrganisationDAO organisationDAO = OrganisationDAO.getPersonDAOInstance();
     List<Person> allPerson = personDAO.getAll();
     List<Organisation> allOrgs = organisationDAO.getAll();
-    protected InfoCommand() {
+    protected InfoCommand() throws FileNotFoundException {
         super("INFO");
     }
 

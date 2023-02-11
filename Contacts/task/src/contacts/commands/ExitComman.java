@@ -1,10 +1,12 @@
 package contacts.commands;
 
+import java.io.FileNotFoundException;
+
 class ExitCommand extends Command{
 
 
 
-    ExitCommand(String inputCommand) {
+    ExitCommand(String inputCommand) throws FileNotFoundException {
             super(inputCommand);
         }
         boolean exit() {

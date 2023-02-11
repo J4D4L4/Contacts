@@ -5,6 +5,7 @@ import contacts.OrganisationDAO;
 import contacts.Person;
 import contacts.PersonDAO;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -16,7 +17,7 @@ public abstract class Command {
     List<Person> allPerson = personDAO.getAll();
     List<Organisation> allOrgs = organisationDAO.getAll();
 
-    protected Command(String inputString){
+    protected Command(String inputString) throws FileNotFoundException {
         this.inputString = inputString;
 
     }
@@ -39,7 +40,7 @@ public abstract class Command {
         }
     }
 
-    public abstract void execute();
+    public abstract void execute() throws FileNotFoundException;
 
 
 }

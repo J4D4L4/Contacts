@@ -2,7 +2,9 @@ package contacts;
 
 import contacts.commands.Entity;
 
-public class Person extends Entity {
+import java.io.Serializable;
+
+public class Person extends Entity  implements Serializable  {
 
 
     String surname;

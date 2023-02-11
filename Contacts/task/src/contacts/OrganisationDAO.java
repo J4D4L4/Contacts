@@ -1,17 +1,23 @@
 package contacts;
 
+import org.apache.commons.lang3.SerializationUtils;
+
+import java.io.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-
+import java.util.Arrays;
 public class OrganisationDAO implements DataAccessObject<Organisation> {
 
     static OrganisationDAO instance;
-    private List<Organisation> organisations = new ArrayList<>();
+    private static List<Organisation> organisations = new ArrayList<>();
+    static String filename = "Organisation.data";
 
-    public static OrganisationDAO getPersonDAOInstance() {
+    public static OrganisationDAO getPersonDAOInstance() throws FileNotFoundException {
         if(instance == null)
+            deSerialize();
             instance = new OrganisationDAO();
         return instance;
     }
@@ -27,11 +33,14 @@ public class OrganisationDAO implements DataAccessObject<Organisation> {
 
     @Override
     public void create(Organisation organisation) {
+
         organisations.add(organisation);
+        serialize();
     }
 
     @Override
     public void update(Organisation organisation, String[] params) {
+        organisation.setEdited(LocalDateTime.now());
 
         if(params[0] != "")
             organisation.setName(Objects.requireNonNull(
@@ -42,6 +51,7 @@ public class OrganisationDAO implements DataAccessObject<Organisation> {
         if(params[2] != "")
             organisation.setNumber(Objects.requireNonNull(
                     params[2], "Number cannot be null"));
+        serialize();
 
     }
 
@@ -55,6 +65,55 @@ public class OrganisationDAO implements DataAccessObject<Organisation> {
             System.out.println(org.toString());
 
         }
+    }
+    public void serialize(){
+
+        try {
+            System.out.println(new File(".").getAbsolutePath());
+            FileOutputStream fileOut = new FileOutputStream(filename);
+            Organisation organisationsArray[] = organisations.toArray(new Organisation[0]);
+            fileOut.write(SerializationUtils.serialize(organisationsArray));
+            fileOut.close();
+            System.out.println("Serialized data is saved in organization.data");
+        } catch (IOException i) {
+            i.printStackTrace();
+        }
+    }
+
+
+
+        /*try {
+            FileOutputStream fos = new FileOutputStream(filename);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            // write object to file
+            SerializationUtils.serialize(organisations.toArray(), oos);
+            System.out.println("Done");
+            oos.;
+            // closing resources
+            oos.close();
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
+
+
+
+    public static void deSerialize() throws FileNotFoundException {
+
+
+
+        try {
+            FileInputStream fileIn = new FileInputStream(filename);
+            Organisation orgList[] = (Organisation[]) SerializationUtils.deserialize(fileIn.readAllBytes());
+            List<Organisation> listAsOrg = new ArrayList<Organisation>(Arrays.asList(orgList));
+            organisations = listAsOrg;
+            fileIn.close();
+        } catch (IOException i) {
+            i.printStackTrace();
+            return;
+        }
+
+
     }
 
 }
