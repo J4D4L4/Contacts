@@ -20,9 +20,12 @@ public class PersonCreationCommand extends Command {
     }
 
     public Person createPerson(String name, String surname, String number) {
-        Person person = new Person(name,surname,number);
+        ContactBuilder contactBuilder = new ContactBuilder();
+        contactBuilder.setName(name);
+        contactBuilder.setSurname(surname);
+        contactBuilder.setNumber(number);
         System.out.println("A record created!");
-        return person;
+        return contactBuilder.getResult();
 
     }
     public String createUserSurNameFromInput() {
