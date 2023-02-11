@@ -35,14 +35,17 @@ public class PersonDAO implements DataAccessObject<Person> {
 
     @Override
     public void update(Person person, String[] params) {
-        person.setName(Objects.requireNonNull(
-                params[0], "Name cannot be null"));
-        person.setSurname(Objects.requireNonNull(
-                params[1], "Surname cannot be null"));
-        person.setNumber(Objects.requireNonNull(
-                params[2], "Number cannot be null"));
+        if(params[0] != "")
+            person.setName(Objects.requireNonNull(
+                    params[0], "Name cannot be null"));
+        if(params[1] != "")
+            person.setSurname(Objects.requireNonNull(
+                    params[1], "Surname cannot be null"));
+        if(params[2] != "")
+            person.setNumber(Objects.requireNonNull(
+                    params[2], "Number cannot be null"));
 
-        persons.add(person);
+        //persons.add(person);
 
     }
 

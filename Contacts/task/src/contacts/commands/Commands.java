@@ -7,7 +7,8 @@ public enum Commands {
     EXIT("EXIT", new ExitCommand("Exit")),
     EDIT("EDIT", new EditCommand()),
     LIST("LIST", new ListCommand()),
-    COUNT("COUNT", new CountCommand())
+    COUNT("COUNT", new CountCommand()),
+    REMOVE("REMOVE", new RemoveCommand())
 
     ;
 
