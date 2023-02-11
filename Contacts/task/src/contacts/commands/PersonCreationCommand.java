@@ -1,8 +1,9 @@
 package contacts.commands;
 
-import contacts.ContactBuilder;
+import contacts.PersonBuilder;
 import contacts.InputValidator;
 import contacts.Person;
+import contacts.PersonBuilder;
 import contacts.PersonDAO;
 
 public class PersonCreationCommand extends Command {
@@ -16,18 +17,21 @@ public class PersonCreationCommand extends Command {
         PersonDAO personDAO = PersonDAO.getPersonDAOInstance();
         String name = createUserNameFromInput();
         String surname = createUserSurNameFromInput();
+        String birthday = createBirthdayFromInput();
+        String gender = createGenderFromInput();
         String number = createNumberFromInput();
-        Person createdPerson = createPerson(name,surname,number);
+        Person createdPerson = createPerson(name,surname,birthday,gender,number);
         personDAO.create(createdPerson);
-        System.out.println("A Phone Book with a single record created!");
 
 
     }
 
-    public Person createPerson(String name, String surname, String number) {
-        ContactBuilder contactBuilder = new ContactBuilder();
+    public Person createPerson(String name, String surname, String birthday, String gender, String number) {
+        PersonBuilder contactBuilder = new PersonBuilder();
         contactBuilder.setName(name);
         contactBuilder.setSurname(surname);
+        contactBuilder.setBirthday(birthday);
+        contactBuilder.setGender(gender);
         contactBuilder.setNumber(number);
         System.out.println("A record created!");
         return contactBuilder.getResult();
@@ -52,6 +56,28 @@ public class PersonCreationCommand extends Command {
             System.out.println("Wrong number format!");
             return "[no number]";
         }
+    }
+
+    public String createBirthdayFromInput() {
+        System.out.println("Enter the birth date:");
+        String birthday = getUserInput();
+        if (InputValidator.validateDate(birthday))
+            return birthday;
+        else {
+            System.out.println("Bad birth date!");
+            return "[no data]";
+        }
+    }
+
+        public String createGenderFromInput() {
+            System.out.println("Enter the gender (M, F):");
+            String gender = getUserInput();
+            if(InputValidator.validateGender(gender))
+                return gender;
+            else {
+                System.out.println("Bad gender!");
+                return "[no data]";
+            }
     }
 
 }
