@@ -42,8 +42,14 @@ public class PersonDAO implements DataAccessObject<Person> {
             person.setSurname(Objects.requireNonNull(
                     params[1], "Surname cannot be null"));
         if(params[2] != "")
-            person.setNumber(Objects.requireNonNull(
+            person.setBirthday(Objects.requireNonNull(
                     params[2], "Number cannot be null"));
+        if(params[3] != "")
+            person.setGender(Objects.requireNonNull(
+                    params[3], "Surname cannot be null"));
+        if(params[4] != "")
+            person.setNumber(Objects.requireNonNull(
+                    params[4], "Number cannot be null"));
 
         //persons.add(person);
 

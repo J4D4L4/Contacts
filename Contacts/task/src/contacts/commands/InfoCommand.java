@@ -5,25 +5,29 @@ import contacts.OrganisationDAO;
 import contacts.Person;
 import contacts.PersonDAO;
 
+import java.text.ParseException;
 import java.util.List;
-import java.util.Scanner;
 
-public abstract class Command {
-
-    String inputString;
+public class InfoCommand extends Command{
     PersonDAO personDAO = PersonDAO.getPersonDAOInstance();
     OrganisationDAO organisationDAO = OrganisationDAO.getPersonDAOInstance();
     List<Person> allPerson = personDAO.getAll();
     List<Organisation> allOrgs = organisationDAO.getAll();
-
-    protected Command(String inputString){
-        this.inputString = inputString;
-
+    protected InfoCommand() {
+        super("INFO");
     }
 
-    public String getUserInput(){
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
+    @Override
+    public void execute() {
+        listAll();
+        try {
+            int idOfEntity = Integer.parseInt(getUserInput());
+            printMoreInfo(idOfEntity);
+        }
+        catch (Exception e) {
+            System.out.println("Wrong Input!");
+        }
+
     }
 
     public void listAll() {
@@ -39,7 +43,12 @@ public abstract class Command {
         }
     }
 
-    public abstract void execute();
-
+    public void printMoreInfo(int id){
+        if(id>allPerson.size()){
+            allOrgs.get(id-1- allPerson.size()).printLongDescription();
+        }
+        else
+            allPerson.get(id-1).printLongDescription();
+    }
 
 }

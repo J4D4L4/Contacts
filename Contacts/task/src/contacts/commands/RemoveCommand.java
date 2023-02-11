@@ -1,5 +1,6 @@
 package contacts.commands;
 
+import contacts.Organisation;
 import contacts.Person;
 import contacts.PersonDAO;
 
@@ -14,31 +15,28 @@ public class RemoveCommand extends Command{
     @Override
     public void execute() {
 
-        personDAO.listPersonRecords();
-        Person personToRemove = getPersonToRemove();
-        removePerson(personToRemove);
-    }
-
-    public Person getPersonToRemove() {
-        int idOfPerson;
+        listAll();
         try {
-            idOfPerson = Integer.parseInt(getUserInput());
-        } catch (Exception e) {
+            int idOfToDelete = Integer.parseInt(getUserInput());
+            removeEntity(idOfToDelete);
+        }
+        catch (Exception e){
+
             System.out.println("Wrong input");
-            idOfPerson = -1;
-        }
-        if(idOfPerson != -1 && idOfPerson <= personDAO.getAll().size()) {
-            return (Person) personDAO.getAll().get(idOfPerson-1);
-        }
-        else
-            return null;
 
-
+        }
     }
 
-    public void removePerson(Person person) {
-
-        personDAO.delete(person);
-
+    public void removeEntity(int id){
+        if(id>allPerson.size()){
+            Organisation toRemoveEntity = allOrgs.get(id-1- allPerson.size());
+            organisationDAO.delete(toRemoveEntity);
+        }
+        else {
+            Person person = allPerson.get(id-1);
+            personDAO.delete(person);
+        }
     }
+
+
 }
