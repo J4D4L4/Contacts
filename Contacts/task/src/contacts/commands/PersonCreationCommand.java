@@ -14,7 +14,7 @@ public class PersonCreationCommand extends Command {
         super("Create Person");
     }
     @Override
-    public void execute() {
+    public void execute() throws FileNotFoundException {
 
         PersonDAO personDAO = PersonDAO.getPersonDAOInstance();
         String name = createUserNameFromInput();

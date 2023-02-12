@@ -1,7 +1,5 @@
 package contacts;
 
-import contacts.commands.Entity;
-
 import java.io.Serializable;
 
 public class Organisation extends Entity  implements Serializable {
@@ -31,5 +29,10 @@ public class Organisation extends Entity  implements Serializable {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    @Override
+    public String appendString() {
+        return getName()+" "+getAddress()+" "+getNumber();
     }
 }

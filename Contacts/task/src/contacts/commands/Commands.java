@@ -85,7 +85,17 @@ public enum Commands {
                 throw new RuntimeException(e);
             }
         }
+    }.evaluate(), false),
+    SEARCH("SEARCH", new Object() {
+        SearchCommand evaluate() {
+            try {
+                return new SearchCommand();
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }.evaluate(), false)
+
 
 
     ;

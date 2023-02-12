@@ -16,9 +16,10 @@ public class OrganisationDAO implements DataAccessObject<Organisation> {
     static String filename = "Organisation.data";
 
     public static OrganisationDAO getPersonDAOInstance() throws FileNotFoundException {
-        if(instance == null)
-            deSerialize();
+        if(instance == null) {
             instance = new OrganisationDAO();
+            deSerialize();
+        }
         return instance;
     }
     @Override
@@ -58,6 +59,7 @@ public class OrganisationDAO implements DataAccessObject<Organisation> {
     @Override
     public void delete(Organisation organisation) {
         organisations.remove(organisation);
+        serialize();
     }
 
     public void listOrgas(){
@@ -79,22 +81,6 @@ public class OrganisationDAO implements DataAccessObject<Organisation> {
             i.printStackTrace();
         }
     }
-
-
-
-        /*try {
-            FileOutputStream fos = new FileOutputStream(filename);
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            // write object to file
-            SerializationUtils.serialize(organisations.toArray(), oos);
-            System.out.println("Done");
-            oos.;
-            // closing resources
-            oos.close();
-            fos.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
 
 
 

@@ -1,9 +1,9 @@
-package contacts.commands;
+package contacts;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class Entity implements Serializable {
+public abstract class Entity implements Serializable {
 
     String name;
     String number;
@@ -35,6 +35,12 @@ public class Entity implements Serializable {
 
 
     }
+
+    public void printEntity(){
+        System.out.println(name);
+    }
+
+    public abstract String appendString() ;
 
     public String getName() {
         return name;

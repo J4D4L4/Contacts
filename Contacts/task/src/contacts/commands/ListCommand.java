@@ -14,7 +14,7 @@ public class ListCommand extends Command{
     }
 
     @Override
-    public void execute() {
+    public void execute() throws FileNotFoundException {
         personDAO.listPersonRecords();
         organisationDAO.listOrgas();
 
