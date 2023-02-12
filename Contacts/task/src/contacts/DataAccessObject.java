@@ -1,5 +1,7 @@
 package contacts;
 
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.List;
 import java.util.Optional;
 public interface DataAccessObject<T> {
@@ -9,5 +11,9 @@ public interface DataAccessObject<T> {
     void create(T t);
     void update(T t, String[] params);
     void delete(T t);
+    private void writeToFile (ObjectOutputStream out) throws IOException {
+        out.writeObject(this);
+        out.close();
+    }
 
 }

@@ -2,20 +2,25 @@ package contacts;
 
 import contacts.DataAccessObject;
 import contacts.Person;
+import org.apache.commons.lang3.SerializationUtils;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.io.*;
+import java.time.LocalDateTime;
+import java.util.*;
 
 public class PersonDAO implements DataAccessObject<Person> {
     //singelton
     static PersonDAO instance;
-    private List<Person> persons = new ArrayList<>();
+    private static List<Person> persons = new ArrayList<>();
 
-    public static PersonDAO getPersonDAOInstance() {
-        if(instance == null)
+    static String filename = "Person.data";
+
+    public static PersonDAO getPersonDAOInstance() throws FileNotFoundException {
+        if(instance == null) {
+
             instance = new PersonDAO();
+            deSerialize();
+        }
         return instance;
     }
     @Override
@@ -31,10 +36,12 @@ public class PersonDAO implements DataAccessObject<Person> {
     @Override
     public void create(Person person) {
         persons.add(person);
+        serialize();
     }
 
     @Override
     public void update(Person person, String[] params) {
+        person.setEdited(LocalDateTime.now());
         if(params[0] != "")
             person.setName(Objects.requireNonNull(
                     params[0], "Name cannot be null"));
@@ -51,6 +58,8 @@ public class PersonDAO implements DataAccessObject<Person> {
             person.setNumber(Objects.requireNonNull(
                     params[4], "Number cannot be null"));
 
+        serialize();
+
         //persons.add(person);
 
     }
@@ -58,10 +67,11 @@ public class PersonDAO implements DataAccessObject<Person> {
     @Override
     public void delete(Person person) {
         persons.remove(person);
+        serialize();
 
     }
 
-    public void listPersonRecords(){
+    public void listPersonRecords() throws FileNotFoundException {
 
         PersonDAO personDAO = PersonDAO.getPersonDAOInstance();
         List<Person> personList = personDAO.getAll();
@@ -70,6 +80,40 @@ public class PersonDAO implements DataAccessObject<Person> {
 
             System.out.println(""+counter+". "+personList.get(counter-1));
         }
+
+    }
+
+    public void serialize(){
+
+        try {
+            System.out.println(new File(".").getAbsolutePath());
+            FileOutputStream fileOut = new FileOutputStream(filename);
+            Person personArray[] = persons.toArray(new Person[0]);
+            fileOut.write(SerializationUtils.serialize(personArray));
+            fileOut.close();
+            System.out.println("Serialized data is saved in organization.data");
+        } catch (IOException i) {
+            i.printStackTrace();
+        }
+    }
+
+
+
+    public static void deSerialize() throws FileNotFoundException {
+
+
+
+        try {
+            FileInputStream fileIn = new FileInputStream(filename);
+            Person personList[] = (Person[]) SerializationUtils.deserialize(fileIn.readAllBytes());
+            List<Person> listAsOrg = new ArrayList<Person>(Arrays.asList(personList));
+            persons = listAsOrg;
+            fileIn.close();
+        } catch (IOException i) {
+            i.printStackTrace();
+            return;
+        }
+
 
     }
 

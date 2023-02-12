@@ -2,10 +2,12 @@ package contacts.commands;
 
 import contacts.PersonDAO;
 
+import java.io.FileNotFoundException;
+
 public class CountCommand extends Command{
 
 
-    protected CountCommand() {
+    protected CountCommand() throws FileNotFoundException {
         super("COUNT");
     }
 

@@ -4,11 +4,13 @@ import contacts.Organisation;
 import contacts.Person;
 import contacts.PersonDAO;
 
+import java.io.FileNotFoundException;
+
 public class RemoveCommand extends Command{
 
     PersonDAO personDAO = PersonDAO.getPersonDAOInstance();
 
-    protected RemoveCommand() {
+    protected RemoveCommand() throws FileNotFoundException {
         super("Remove");
     }
 

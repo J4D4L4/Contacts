@@ -1,7 +1,16 @@
 package contacts;
 
+import java.io.FileNotFoundException;
+
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
+        PersonDAO personDAO = PersonDAO.getPersonDAOInstance();
+        OrganisationDAO organisationDAO = OrganisationDAO.getPersonDAOInstance();
+
+        if (args[0] != null){
+            personDAO.filename = args[0]+"person.data";
+            organisationDAO.filename = args[0]+"organisation.data";
+        }
 
         CommandLineInterface cli = new CommandLineInterface();
         setUpTestData();
@@ -9,7 +18,7 @@ public class Main {
 
     }
 
-    public static void setUpTestData(){
+    public static void setUpTestData() throws FileNotFoundException {
 
         PersonDAO personDAO = PersonDAO.getPersonDAOInstance();
         OrganisationDAO organisationDAO = OrganisationDAO.getPersonDAOInstance();

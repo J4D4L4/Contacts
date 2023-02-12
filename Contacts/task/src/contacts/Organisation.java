@@ -1,10 +1,11 @@
 package contacts;
 
-import contacts.commands.Entity;
+import java.io.Serializable;
 
-public class Organisation extends Entity {
+public class Organisation extends Entity  implements Serializable {
 
     public String address;
+    private static final long serialVersionUID = 1l;
     protected Organisation(String name, String number, String address) {
         super(name, number);
         this.address = address;
@@ -28,5 +29,10 @@ public class Organisation extends Entity {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    @Override
+    public String appendString() {
+        return getName()+" "+getAddress()+" "+getNumber();
     }
 }

@@ -2,11 +2,12 @@ package contacts;
 
 import contacts.commands.Commands;
 
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class CommandLineInterface {
 
-    public void run() {
+    public void run() throws FileNotFoundException {
         while (true) {
 
             printMenu();
@@ -27,7 +28,7 @@ public class CommandLineInterface {
 
     }
 
-    public void interpretInput(String input){
+    public void interpretInput(String input) throws FileNotFoundException {
         boolean foundCommand = false;
         for (Commands c: Commands.values()) {
             if (c.strCommand.equals(input.toUpperCase())){

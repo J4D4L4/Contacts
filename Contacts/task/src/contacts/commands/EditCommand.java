@@ -2,12 +2,13 @@ package contacts.commands;
 
 import contacts.*;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
 public class EditCommand extends Command {
 
 
-    public EditCommand() {
+    public EditCommand() throws FileNotFoundException {
         super("Edit Person");
     }
 

@@ -6,13 +6,15 @@ import contacts.Person;
 import contacts.PersonBuilder;
 import contacts.PersonDAO;
 
+import java.io.FileNotFoundException;
+
 public class PersonCreationCommand extends Command {
 
-    public PersonCreationCommand() {
+    public PersonCreationCommand() throws FileNotFoundException {
         super("Create Person");
     }
     @Override
-    public void execute() {
+    public void execute() throws FileNotFoundException {
 
         PersonDAO personDAO = PersonDAO.getPersonDAOInstance();
         String name = createUserNameFromInput();

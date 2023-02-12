@@ -2,14 +2,16 @@ package contacts.commands;
 
 import contacts.*;
 
+import java.io.FileNotFoundException;
+
 public class OrganisationCreationCommand extends Command{
-    protected OrganisationCreationCommand() {
+    protected OrganisationCreationCommand() throws FileNotFoundException {
         super("Organisation");
     }
 
 
     @Override
-    public void execute() {
+    public void execute() throws FileNotFoundException {
 
         OrganisationDAO organisationDAO = OrganisationDAO.getPersonDAOInstance();
         String name = createOrgaNameFromInput();

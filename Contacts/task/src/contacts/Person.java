@@ -1,14 +1,14 @@
 package contacts;
 
-import contacts.commands.Entity;
+import java.io.Serializable;
 
-public class Person extends Entity {
+public class Person extends Entity  implements Serializable  {
 
 
     String surname;
     String birthday;
     String gender;
-
+    private static final long serialVersionUID = 1l;
 
 
     public Person(String name, String surname, String birthday, String gender, String number) {
@@ -59,5 +59,17 @@ public class Person extends Entity {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    @Override
+    public String appendString() {
+        return getName()+" "+getSurname()+" "+getGender()+" "+getGender()+" "+getBirthday();
+    }
+
+    @Override
+    public void printEntity(){
+
+        System.out.println(name+" "+surname);
+
     }
 }
