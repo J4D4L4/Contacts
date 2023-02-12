@@ -11,9 +11,9 @@ import java.util.*;
 public class PersonDAO implements DataAccessObject<Person> {
     //singelton
     static PersonDAO instance;
-    private static List<Person> persons = new ArrayList<>();
+    public static List<Person> persons = new ArrayList<>();
 
-    static String filename = "Person.data";
+    public static String filename = "Person.data";
 
     public static PersonDAO getPersonDAOInstance() throws FileNotFoundException {
         if(instance == null) {

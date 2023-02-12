@@ -6,7 +6,7 @@ public class Organisation extends Entity  implements Serializable {
 
     public String address;
     private static final long serialVersionUID = 1l;
-    protected Organisation(String name, String number, String address) {
+    public Organisation(String name, String number, String address) {
         super(name, number);
         this.address = address;
     }

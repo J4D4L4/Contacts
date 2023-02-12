@@ -13,7 +13,7 @@ public class OrganisationDAO implements DataAccessObject<Organisation> {
 
     static OrganisationDAO instance;
     private static List<Organisation> organisations = new ArrayList<>();
-    static String filename = "Organisation.data";
+    public static String filename = "Organisation.data";
 
     public static OrganisationDAO getPersonDAOInstance() throws FileNotFoundException {
         if(instance == null) {
@@ -24,7 +24,10 @@ public class OrganisationDAO implements DataAccessObject<Organisation> {
     }
     @Override
     public Optional get(long id) {
-        return Optional.ofNullable(organisations.get((int) id));
+        if(id< organisations.size()) {
+            return Optional.ofNullable(organisations.get((int) id));
+        }
+        else return Optional.ofNullable(null);
     }
 
     @Override
