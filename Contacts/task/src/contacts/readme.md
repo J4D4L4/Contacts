@@ -3,4 +3,6 @@ Contacts App
 - Stage1: In the first stage, you should write a program that creates an instance of a class that stores information about one record in the Contacts. One record should contain a name, a surname, and a phone number. You can type them from the keyboard.
 - Stage 2: In this stage, you should write a program that keeps all the records in a list. You should be able to add, remove, edit the records, and get the number of records. If the user inputs an incorrect phone number, you should reset it as empty. If the number is empty, you should write the string [no number] instead of it.
 - Stage 3: In this stage, you will write a program that can store not only information about people but also organizations.
-- 
+- Stage 4: Also, in this stage, you should implement saving to a file and loading from a file. You can save the Contacts using serialization. You should specify a file you are working with by a command-line argument. This would automatically save the Contacts on the hard drive after each action that modifies data. If you don't specify an argument, then you should create a new Contacts and keep it in memory. If you specify a file that doesn't exist, you should create an empty Contacts and save all changes to the newly created file.
+
+Also, in this stage, you should implement search functionality. For this, you can append all of the values from all of the fields and check if this string contains a search request. It should support regular expressions, too! And, of course, it should be case insensitive.
